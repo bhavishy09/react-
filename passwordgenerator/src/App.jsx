@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -8,6 +8,13 @@ function App() {
   const [number,setNumber] = useState(false)
   const [charactor,setChar] = useState(false)
   const [password,setPasword] = useState("")
+
+  //useref hook--> when we want to take refernce of any thrn use refernce hook 
+// to use it make a varibale 
+
+const passwordref=useRef(null)
+
+
 
   //FOR GENERATE RANDOM PASSWORD WE USE USE CALLBACK FUNCTIONALITY  
   //USE CALLBACK IS  REACT HOOK THATS LETS YOU CACHE A FUNCTION DEFINITION  BETWEEN RENDERS
@@ -23,11 +30,42 @@ function App() {
       //(math.random()*str.length+1) this is how random no. generate 
       let char =Math.floor(Math.random() * str.length+1)
 
-      pass=str.charAt(char)
+      pass+=str.charAt(char)
     }
     setPasword(pass)
 
-  },[length,number,charactor,setPasword])
+  },[length,number,charactor])  //<--use callback dependicies are for optimization
+  //basically for memorize and cache m rkhta h ,no m change and char change m then optimize 
+
+//use usecallback()
+
+const copypasswordtoClipboard = useCallback(()=>{
+
+  //use of useref to give better optimization like select the text and all by usning useref
+  passwordref.current?.select();
+
+  window.navigator.clipboard.writeText(password)
+
+},[password])
+
+
+
+
+
+//useeffect is a hook which is lets you synvhronize a component with external system
+//depemdicies m kuch bhi change dubara se run kr do 
+
+  useEffect(() => 
+  {
+    passwordgenerator()
+  } 
+  ,[length,number,charactor,passwordgenerator])
+
+
+
+
+
+
 
   return (
    <>
@@ -42,8 +80,9 @@ function App() {
       className='outline-none w-full py-1 px-3'
       placeholder='password'
       readOnly
+      ref={passwordref}
       />
-      <button className='rounded-xl text-white bg-blue-700 px-1 py-1 shrink-0'>copy</button>
+      <button onClick={copypasswordtoClipboard} className='rounded-xl text-white bg-blue-700 px-1 py-1 shrink-0'>copy</button>
     </div>
 
 
