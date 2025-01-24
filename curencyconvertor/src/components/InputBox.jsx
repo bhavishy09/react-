@@ -14,7 +14,7 @@ function InputBox({
   //-> this is user se css 
   className = "",
 }) {
-      const amountid = useid()
+      const amountid = useId()
 
 
   return (
