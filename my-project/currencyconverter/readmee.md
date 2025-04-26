@@ -1,0 +1,2 @@
+◦
+Use other Hooks: Custom hooks can utilize other React hooks like useState and useEffect inside their implementation. This allows them to manage state and perform side effects (like API calls) in a reusable manner
