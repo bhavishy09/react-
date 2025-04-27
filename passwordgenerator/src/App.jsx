@@ -1,6 +1,6 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { Component, useCallback, useEffect, useRef, useState } from 'react'
+import {InputBox}  from '../../my-project/src/components'
+import useCurrencInfo  from '../../my-project/src/hooks/useCurrencyInfo'
 import './App.css'
 
 function App() {
